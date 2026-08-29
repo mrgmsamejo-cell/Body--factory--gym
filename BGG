@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Factory Gym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff4a36;
+            --primary-hover: #e03e2b;
+            --dark-bg: #111111;
+            --text-dark: #222222;
+            --text-light: #ffffff;
+            --text-gray: #666666;
+            --border-color: #eeeeee;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header & Mobile Navigation --- */
+        header {
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        .brand-logo i {
+            font-size: 24px;
+            color: var(--text-dark);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: 1px;
+        }
+
+        .hero-tagline {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 12px 26px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .btn-primary:active {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- Program Categories --- */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+        }
+
+        .category-card {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+
+        .category-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .category-title {
+            position: relative;
+            z-index: 2;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* --- Services --- */
+        .services {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+
+        .services-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-icon {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .service-name {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* --- Info Section --- */
+        .info-section {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .rating-stars {
+            color: #ffb400;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .rating-score {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--dark-bg);
+            color: #cccccc;
+            padding: 40px 20px 20px;
+            font-size: 13px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-box h4 {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 11px;
+            color: #777777;
+            padding-top: 15px;
+            border-top: 1px solid #222222;
+        }
+
+        /* --- Modal --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 4px;
+            max-width: 350px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888888;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                padding: 15px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .categories, .services-grid, .info-container, .footer-container {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <i class="fa-solid fa-dumbbell"></i>
+                GYM
+            </a>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">HOME</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#classes" class="nav-link">CLASSES</a>
+                <a href="#reviews" class="nav-link">REVIEWS</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-subtitle">START YOUR</div>
+            <h1 class="hero-title">FITNESS</h1>
+            <div class="hero-tagline">WITH BODY FACTORY GYM</div>
+            <button class="btn-primary" onclick="openModal()">BECOME MEMBER</button>
+        </div>
+    </section>
+
+    <section class="categories" id="classes">
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop" alt="Body Building">
+            <div class="category-title">BODY BUILDING</div>
+        </div>
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=800&auto=format&fit=crop" alt="Yoga Classes">
+            <div class="category-title">YOGA CLASSES</div>
+        </div>
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="Aerobics Classes">
+            <div class="category-title">AEROBICS CLASSES</div>
+        </div>
+    </section>
+
+    <section class="services" id="about">
+        <h2 class="section-title">WHAT WE PROVIDE</h2>
+        <p class="section-description">Premier fitness facilities designed for strength and conditioning.</p>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="service-name">BEST EQUIPMENT</div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                <div class="service-name">NUTRITION PLAN</div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon"><i class="fa-solid fa-person-swimming"></i></div>
+                <div class="service-name">SWIMMING POOL</div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon"><i class="fa-solid fa-shower"></i></div>
+                <div class="service-name">SHOWER SERVICE</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="reviews">
+        <div class="info-container">
+            <div>
+                <h3>GOOGLE RATING</h3>
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <div class="rating-score">4.3 / 5.0</div>
+            </div>
+            <div>
+                <h3>REVIEWS</h3>
+                <div class="rating-score">137 Reviews</div>
+            </div>
+            <div>
+                <h3>MEMBERSHIP</h3>
+                <button class="btn-primary" style="margin-top: 10px; padding: 6px 14px; font-size: 11px;" onclick="openModal()">Join Now</button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-box">
+                <h4>BODY FACTORY GYM</h4>
+                <p>Your ultimate destination for body building and fitness in Hyderabad.</p>
+            </div>
+            <div class="footer-box">
+                <h4>LOCATION</h4>
+                <p>Wadhu Wah Rd, H.D.A Bungalows Phase II Momin Nagar, Hyderabad</p>
+            </div>
+            <div class="footer-box">
+                <h4>CONTACT</h4>
+                <p>Call: <a href="tel:03323509963" class="contact-link">0332 3509963</a></p>
+                <p>WhatsApp: <a href="https://wa.me/923323509963" target="_blank" class="contact-link">+92 332 3509963</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Body Factory Gym
+        </div>
+    </footer>
+
+    <div class="modal" id="membershipModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 style="margin-bottom: 15px;">Join Gym</h3>
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" value="0332 " required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Plan</option>
+                        <option value="bodybuilding">Body Building</option>
+                        <option value="yoga">Yoga Classes</option>
+                        <option value="aerobics">Aerobics Classes</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        function openModal() {
+            document.getElementById('membershipModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('membershipModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('membershipModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you shortly.');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
